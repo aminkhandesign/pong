@@ -12,14 +12,24 @@ var radius = 25;
 var lives = 10;
 var speed_horizontal = 5;
 var speed_vertical = 5;
-var x_pos = 25;
+var x_pos = 100;
 var y_pos = 25;
-
+var paddle_top = 175;
+var paddle_bottom = 325;
 // ctx.fillRect(x_pos,y_pos,box_width,box_height);
 // console.log(x_pos,y_pos,box_width,box_height);
 
 //paddles 
-
+document.addEventListener("keydown",function(ev){
+    if (ev.keyCode==38){
+        paddle_top-=20;
+        paddle_bottom-=20;
+    }
+    if (ev.keyCode==40){
+        paddle_top+=20;
+        paddle_bottom+=20;
+    }
+})
 //lives
 
 
@@ -30,18 +40,27 @@ function game(){
 
 
 //miss check
-if(x_pos<25){
-    if(lives>=0){lives--}
-    else (gameover());
+// if(x_pos<25){
+//     if(lives>=0){lives--}
+//     else (gameover());
 
     
-}
+// }
 lives_display.innerHTML = lives;
-// wall collision check     
-if(x_pos < 25 || x_pos >675){speed_horizontal = -1*(speed_horizontal)} ;
+// wall collision check    
+if((x_pos < 50 && (y_pos<paddle_bottom && y_pos>paddle_top)) || x_pos >675){speed_horizontal = -1*(speed_horizontal)} ;
+if(x_pos < 25 && (y_pos>paddle_bottom || y_pos<paddle_top)) {
+    speed_horizontal = -1*(speed_horizontal);
+    if(lives>=0){lives--}
+    else gameover();
+}
 if(y_pos < 25 || y_pos >475){speed_vertical = -1*(speed_vertical)}; 
 
+function gameover(){
 
+    document.innerHTML="game over";
+    
+}
 
 //rendering elements
 
@@ -57,8 +76,13 @@ x_pos+=speed_horizontal;y_pos+=speed_vertical;
 
 
 //draw retangle
+
 ctx.fillStyle = 'orangered';
-ctx.fillRect(0,150,50,200);
+ctx.fillRect(0,paddle_top,30,150);
+
+//control paddle
+
+
 
 
 

@@ -20,11 +20,14 @@ var y_pos = 25;
 
 //paddles 
 
-
 //lives
 
 
-function move(){
+function game(){
+
+    ctx.clearRect(0,0,700,500);  
+
+
 
 //miss check
 if(x_pos<25){
@@ -38,8 +41,12 @@ lives_display.innerHTML = lives;
 if(x_pos < 25 || x_pos >675){speed_horizontal = -1*(speed_horizontal)} ;
 if(y_pos < 25 || y_pos >475){speed_vertical = -1*(speed_vertical)}; 
 
+
+
+//rendering elements
+
 // draw the circle
-ctx.clearRect(0,0,700,500);        
+      
 ctx.fillStyle='red';
 ctx.beginPath();
 ctx.arc(x_pos,y_pos,radius,circle_start,circle_end);
@@ -49,11 +56,17 @@ ctx.fill();
 x_pos+=speed_horizontal;y_pos+=speed_vertical;
 
 
-requestAnimationFrame(move);
+//draw retangle
+ctx.fillStyle = 'orangered';
+ctx.fillRect(0,150,50,200);
+
+
+
+requestAnimationFrame(game);
     }
 
-    console.log(circle_start,circle_end)
+ 
 
 
- move();
+  game();
 }

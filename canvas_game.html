@@ -3,7 +3,13 @@
 <head>
     <title>My First Canvas Game</title>
     <script src="./canvas_game.js"></script>
-    <style> #cvs{background:rgb(195, 228, 241)}</style>
+    <style> *{box-sizing: border-box}
+    #cvs{background:rgb(195, 228, 241)}
+            #lives{width:50px;height:50px;border:2px solid green;
+            position:absolute;left:10px;top:10px;text-align:center;
+            font-family: monospace;font-size:20px;padding-top:10px}
+    
+    </style>
 
 </head>
 <body>
@@ -11,7 +17,7 @@
 
         <canvas id ="cvs" width="700" height="500"></canvass>
     </div>
-
+<div id="lives"></div>
 
 </body>
 

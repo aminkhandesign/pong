@@ -16,20 +16,23 @@ var x_pos = 100;
 var y_pos = 25;
 var paddle_top = 175;
 var paddle_bottom = 325;
+var velocity_up,velocity_down,velocity_left,velocity_right=0;
+var friction=0.75;
 // ctx.fillRect(x_pos,y_pos,box_width,box_height);
 // console.log(x_pos,y_pos,box_width,box_height);
 
 //paddles 
+var keys = [];
 document.addEventListener("keydown",function(ev){
-    if (ev.keyCode==38){
-        paddle_top-=20;
-        paddle_bottom-=20;
-    }
-    if (ev.keyCode==40){
-        paddle_top+=20;
-        paddle_bottom+=20;
-    }
+    keys[ev.keyCode]=true;
+
+
 })
+
+document.addEventListener("keyup",function(ev){
+    keys[ev.keyCode]=false;
+})
+
 //lives
 
 
@@ -51,8 +54,8 @@ lives_display.innerHTML = lives;
 if((x_pos < 50 && (y_pos<paddle_bottom && y_pos>paddle_top)) || x_pos >675){speed_horizontal = -1*(speed_horizontal)} ;
 if(x_pos < 25 && (y_pos>paddle_bottom || y_pos<paddle_top)) {
     speed_horizontal = -1*(speed_horizontal);
-    if(lives>=0){lives--}
-    else gameover();
+    if(lives>0){lives--}
+    else if (lives==0){gameover()};
 }
 if(y_pos < 25 || y_pos >475){speed_vertical = -1*(speed_vertical)}; 
 

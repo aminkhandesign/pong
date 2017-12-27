@@ -63,7 +63,7 @@ if(y_pos < 25 || y_pos >475){speed_vertical = -1*(speed_vertical)};
 
 function gameover(){
 
-    document.innerHTML="game over";
+    document.body.innerHTML="game over";
     
 }
 

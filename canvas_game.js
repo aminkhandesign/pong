@@ -18,6 +18,7 @@ var paddle_top = 175;
 var paddle_bottom = 325;
 var velocity_up,velocity_down,velocity_left,velocity_right=0;
 var friction=0.75;
+var move_amount = 1;
 // ctx.fillRect(x_pos,y_pos,box_width,box_height);
 // console.log(x_pos,y_pos,box_width,box_height);
 
@@ -56,6 +57,7 @@ if(x_pos < 25 && (y_pos>paddle_bottom || y_pos<paddle_top)) {
     speed_horizontal = -1*(speed_horizontal);
     if(lives>0){lives--}
     else if (lives==0){gameover()};
+    
 }
 if(y_pos < 25 || y_pos >475){speed_vertical = -1*(speed_vertical)}; 
 
@@ -80,8 +82,17 @@ x_pos+=speed_horizontal;y_pos+=speed_vertical;
 
 //draw retangle
 
+if(keys[38])
+{
+    move_amount *= friction;
+}
+if(keys[40]){
+    move_amount *= -friction;
+}
+paddle_top+=move_amount;
 ctx.fillStyle = 'orangered';
 ctx.fillRect(0,paddle_top,30,150);
+
 
 //control paddle
 

@@ -52,21 +52,27 @@ function game(){
 // }
 lives_display.innerHTML = lives;
 // wall collision check    
-if((x_pos < 50 && (y_pos<paddle_bottom && y_pos>paddle_top)) || x_pos >675){speed_horizontal = -1*(speed_horizontal)} ;
-//the above condition checks for i) touching the LEFT side (x_pos<50) AND NOT touching the left paddle OR 
+if((x_pos < 50 && (y_pos<paddle_bottom && y_pos>paddle_top)) || x_pos >675){speed_horizontal = -speed_horizontal} ;
+//the above condition checks for i) touching the LEFT side (x_pos<50) AND  touching the left paddle OR  its touching right hand size(x_pos>675)
+//reverses horizontal speed
+
+
 if(x_pos < 25 && (y_pos>paddle_bottom || y_pos<paddle_top)) {
-    speed_horizontal = -1*(speed_horizontal);
+    speed_horizontal = -speed_horizontal;
     if(lives>0){lives--}
-    else if (lives==0){gameover()};
-    
+    else if (lives==0){gameover()};    
 }
-if(y_pos < 25 || y_pos >475){speed_vertical = -1*(speed_vertical)}; 
+//this checks if the ball is  touching left wall and  NOT touching the paddle , 
+//reverses horizontal speed, also checks and adjusts lives, invokes gameover() is less than 0
+
+if(y_pos < 25 || y_pos >475){speed_vertical = -speed_vertical}; 
+//changes vertical speed if touching top or bottom walls
 
 function gameover(){
-
-    document.body.innerHTML="game over";
-    
+    document.body.innerHTML="game over";  
 }
+//game over function simply replacing contents with 'game over'
+
 
 //rendering elements
 
@@ -86,9 +92,11 @@ x_pos+=speed_horizontal;y_pos+=speed_vertical;
 if(keys[38])
 {
     move_amount *= friction;
+    console.log("key press detected")
 }
 if(keys[40]){
     move_amount *= -friction;
+    console.log("key UP detected")
 }
 paddle_top+=move_amount;
 ctx.fillStyle = 'orangered';

@@ -91,11 +91,15 @@ x_pos+=speed_horizontal;y_pos+=speed_vertical;
 
 if(keys[38])
 {
-    move_amount *= friction;
+    //move_amount *= friction;
+    move_amount--;
+    if(move_amount<-5){move_amount=-5}
     console.log("key press detected")
 }
 if(keys[40]){
-    move_amount *= -friction;
+    //move_amount *= -friction;
+    move_amount++;
+    if(move_amount>5){move_amount=5}
     console.log("key UP detected")
 }
 paddle_top+=move_amount;

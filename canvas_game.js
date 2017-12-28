@@ -1,6 +1,6 @@
-window.onload=game;
+window.onload=pong;
 
-function game(){
+function pong(){
 console.log("New Game Loaded");
 
 //dom assignment
@@ -53,6 +53,7 @@ function game(){
 lives_display.innerHTML = lives;
 // wall collision check    
 if((x_pos < 50 && (y_pos<paddle_bottom && y_pos>paddle_top)) || x_pos >675){speed_horizontal = -1*(speed_horizontal)} ;
+//the above condition checks for i) touching the LEFT side (x_pos<50) AND NOT touching the left paddle OR 
 if(x_pos < 25 && (y_pos>paddle_bottom || y_pos<paddle_top)) {
     speed_horizontal = -1*(speed_horizontal);
     if(lives>0){lives--}

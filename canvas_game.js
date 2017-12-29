@@ -14,6 +14,7 @@ var speed_horizontal = 5;
 var speed_vertical = 5;
 var x_pos = 100;
 var y_pos = 25;
+var collision_height;
 var paddle_top = 175;
 var paddle_bottom = 325;
 var velocity_up,velocity_down,velocity_left,velocity_right=0;
@@ -50,9 +51,10 @@ function game(){
 
 
 // }
-lives_display.innerHTML = lives;
+lives_display.innerHTML = collision_height;
 // wall collision check
-if((x_pos < 50 && (y_pos<paddle_bottom && y_pos>paddle_top)) || x_pos >675){speed_horizontal = -speed_horizontal} ;
+if((x_pos < 50 && (y_pos<paddle_bottom && y_pos>paddle_top)) || x_pos >675){speed_horizontal = -speed_horizontal
+collision_height=y_pos} ;
 //the above condition checks for i) touching the LEFT side (x_pos<50) AND  touching the left paddle OR  its touching right hand size(x_pos>675)
 //reverses horizontal speed
 
@@ -96,11 +98,13 @@ if(keys[38] && paddle_top>5)
     move_amount--;
     if(move_amount < -5){move_amount=-5}
     paddle_top+=move_amount;
+    paddle_bottom=paddle_top+150;
     console.log("key press detected")
 }
 else if (keys[38] && paddle_top<15) {
   move_amount=-move_amount;
     paddle_top+=move_amount;
+    paddle_bottom=paddle_top+150;
   console.log("woops")
 }
 
@@ -109,11 +113,13 @@ if((keys[40]) && paddle_top<345){
     move_amount++;
     if(move_amount > 5){move_amount=5}
     paddle_top+=move_amount;
+    paddle_bottom=paddle_top+150;
     console.log("key UP detected")
 }
 else if ((keys[40]) && paddle_top>330)
 {  move_amount=-move_amount;
   paddle_top+=move_amount;
+  paddle_bottom=paddle_top+150;
   console.log("woops")}
 
 

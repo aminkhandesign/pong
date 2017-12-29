@@ -89,34 +89,35 @@ x_pos+=speed_horizontal;y_pos+=speed_vertical;
 
 //draw retangle
 
-if(keys[38] && paddle_top>15)
+
+if(keys[38] && paddle_top>5)
 {
-    //move_amount *= friction;
     //check if hitting walls
     move_amount--;
-    if(move_amount<-5){move_amount=-5}
+    if(move_amount < -5){move_amount=-5}
+    paddle_top+=move_amount;
     console.log("key press detected")
 }
 else if (keys[38] && paddle_top<15) {
-  move_amount=20;
+  move_amount=-move_amount;
+    paddle_top+=move_amount;
   console.log("woops")
 }
 
-if((keys[40]) && paddle_top<400){
+if((keys[40]) && paddle_top<345){
     //move_amount *= -friction;
     move_amount++;
-    if(move_amount>=15){move_amount=5}
+    if(move_amount > 5){move_amount=5}
+    paddle_top+=move_amount;
     console.log("key UP detected")
 }
-else if ((keys[40]) && paddle_top>400)
-{  move_amount= -20;
+else if ((keys[40]) && paddle_top>330)
+{  move_amount=-move_amount;
+  paddle_top+=move_amount;
   console.log("woops")}
 
 
 
-if(paddle_top>15 || paddle_top<400){
-paddle_top+=move_amount;}
-else{paddle_top-=move_amount}
 
 ctx.fillStyle = 'orangered';
 ctx.fillRect(0,paddle_top,30,150);

@@ -24,6 +24,8 @@ var move_amount = 1;
 // console.log(x_pos,y_pos,box_width,box_height);
 
 //paddles
+var hitEffect = 255;
+
 var keys = [];
 document.addEventListener("keydown",function(ev){
     keys[ev.keyCode]=true;
@@ -51,10 +53,13 @@ function game(){
 
 
 // }
-lives_display.innerHTML = collision_height;
+lives_display.innerHTML = lives;
 // wall collision check
-if((x_pos < 50 && (y_pos<paddle_bottom && y_pos>paddle_top)) || x_pos >675){speed_horizontal = -speed_horizontal
-collision_height=y_pos} ;
+if((x_pos < 50 && (y_pos<paddle_bottom && y_pos>paddle_top)) || x_pos >675){
+speed_horizontal = -speed_horizontal
+collision_height=y_pos ;
+hitEffect+=5;}
+
 //the above condition checks for i) touching the LEFT side (x_pos<50) AND  touching the left paddle OR  its touching right hand size(x_pos>675)
 //reverses horizontal speed
 
@@ -124,8 +129,8 @@ else if ((keys[40]) && paddle_top>330)
 
 
 
-
-ctx.fillStyle = 'orangered';
+hitEffect--;
+ctx.fillStyle = `rgb(${hitEffect},56,0)`;
 ctx.fillRect(0,paddle_top,30,150);
 
 

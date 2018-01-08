@@ -25,8 +25,17 @@ var points=0;
 // ctx.fillRect(x_pos,y_pos,box_width,box_height);
 // console.log(x_pos,y_pos,box_width,box_height);
 
+//
+//sound 
+// var context = new AudioContext()
+// var o = context.createOscillator()
+// var  g = context.createGain()
+// o.connect(g)
+// g.connect(context.destination)
+// o.start(0)
+
 //paddles
-var hitEffect = 255;
+var hitEffect = 30;
 
 var keys = [];
 document.addEventListener("keydown",function(ev){
@@ -46,20 +55,20 @@ document.addEventListener("keyup",function(ev){
 var flag = true;
 
 function fade(fadeSpeed){
-   if (hitEffect>150 && flag){
+   if (hitEffect>15 && flag){
                     requestAnimationFrame(()=>{hitEffect-=fadeSpeed;console.log(hitEffect);fade(fadeSpeed)})
                     }
-   else if(hitEffect<=155) 
+   else if(hitEffect<=15) 
                         {
                             flag = false;hitEffect+=fadeSpeed;console.log(hitEffect);fade(fadeSpeed);
                         }
-    else if(!flag && hitEffect<255)
+    else if(!flag && hitEffect<30)
                         {
                             requestAnimationFrame( ()=>{hitEffect+=fadeSpeed;console.log(hitEffect);fade(fadeSpeed)})
                         }
-    else if(hitEffect>=255)
+    else if(hitEffect>=30)
                         {
-                            flag = true;hitEffect=255;return null
+                            flag = true;hitEffect=30;return null
                         }
                        
 }
@@ -85,7 +94,7 @@ score_display.innerHTML = points;
 if((x_pos < 50 && (y_pos<paddle_bottom && y_pos>paddle_top)) || x_pos >675){
 speed_horizontal = -speed_horizontal
 collision_height=y_pos ;
-if(x_pos<675){ fade(5);points++;if(points%5==0){speed_horizontal+=5;speed_vertical+=5}}
+if(x_pos<675){ fade(1);points++;if(points%5==0){speed_horizontal+=5;speed_vertical+=5}}
 }
 
 //the above condition checks for i) touching the LEFT side (x_pos<50) AND  touching the left paddle OR  its touching right hand size(x_pos>675)
@@ -156,10 +165,11 @@ else if ((keys[40]) && paddle_top>330)
   console.log("woops")}
 
 
-  var gradient = ctx.createLinearGradient(0,paddle_top-75,30,paddle_top-75);
-  gradient.addColorStop(0, `rgb(255,0,10)` );
-  gradient.addColorStop(1, `rgb(${hitEffect},0,10)`);
-
+  var gradient = ctx.createLinearGradient(30,paddle_top-75,0,paddle_top-75);
+  gradient.addColorStop(0, `orangered` );
+  gradient.addColorStop(1, `orangered`);
+ctx.shadowBlur=30-hitEffect;
+ctx.shadowColor = "orangered";
 ctx.fillStyle = gradient;
 ctx.fillRect(0,paddle_top,30,150);
 
